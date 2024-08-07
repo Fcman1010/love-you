@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าล็อคอิน</title>
+    <title>ทดสอบความรู้ใจ</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,85 +11,38 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
             background-color: #f7f7f7;
         }
         .container {
             text-align: center;
-            border: 1px solid #ccc;
+            background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: #fff;
         }
         .input-field {
             margin: 10px 0;
-        }
-        .message {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .log-list {
-            margin-top: 20px;
-            text-align: left;
-            display: none;
-        }
-        .log-item {
-            border-bottom: 1px solid #ccc;
-            padding: 5px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>เข้าสู่ระบบ</h1>
+        <h1>ทดสอบความรู้ใจ</h1>
         <div class="input-field">
-            <label for="username">ชื่อผู้ใช้:</label>
-            <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้ของคุณ">
+            <label for="name">ชื่อของคุณ:</label>
+            <input type="text" id="name" placeholder="ใส่ชื่อของมึงซะไอสัส">
         </div>
-        <button onclick="login()">ยืนยัน</button>
-        <div id="message" class="message"></div>
-        <div class="input-field">
-            <label for="adminPassword">รหัสผ่านแอดมิน:</label>
-            <input type="password" id="adminPassword" placeholder="กรอกรหัสผ่านแอดมิน">
-        </div>
-        <button onclick="showLog()">ดูประวัติการกรอก</button>
-        <div id="log" class="log-list"></div>
+        <button onclick="startQuiz()">เริ่มทำแบบทดสอบ</button>
     </div>
-
     <script>
-        function login() {
-            const usernameInput = document.getElementById('username').value;
-            if (usernameInput) {
-                saveUsernameLog(usernameInput);
-                window.location.href = "question.html";
+        function startQuiz() {
+            const name = document.getElementById('name').value;
+            if (name) {
+                localStorage.setItem('userName', name);
+                window.location.href = "quiz.html";
             } else {
-                const message = document.getElementById('message');
-                message.textContent = "โปรดกรอกชื่อผู้ใช้.";
-                message.className = "message error";
+                alert("ใส่ชื่อเล่น");
             }
-        }
-
-        function saveUsernameLog(username) {
-            let usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
-            usernameLog.push({ username: username, timestamp: new Date().toLocaleString() });
-            localStorage.setItem('usernameLog', JSON.stringify(usernameLog));
-        }
-
-        function showLog() {
-            const adminPassword = document.getElementById('adminPassword').value;
-            if (adminPassword === '2546') {
-                displayUsernameLog();
-            } else {
-                alert('รหัสผ่านแอดมินไม่ถูกต้อง');
-            }
-        }
-
-        function displayUsernameLog() {
-            const logContainer = document.getElementById('log');
-            const usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
-            logContainer.innerHTML = usernameLog.map(log => `<div class="log-item">${log.timestamp}: ${log.username}</div>`).join('');
-            logContainer.style.display = 'block';
         }
     </script>
 </body>
