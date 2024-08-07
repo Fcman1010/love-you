@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำถามรัก</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>คุณรักฉันไหม?</h1>
+        <div class="button-container">
+            <button id="loveButton" onclick="showImage()">รัก</button>
+            <button id="notLoveButton" onclick="increaseLoveButton()">ไม่รัก</button>
+        </div>
+        <div id="result">
+            <img id="gifImage" src="https://cdn.discordapp.com/attachments/1239628806646661173/1270592186991513673/image0.gif?ex=66b442af&is=66b2f12f&hm=5183a22fd4d0570f4ff7c6e8b2acafcaff45f340d6965308efb9cac6c3c81375&" alt="รัก" style="display:none;">
+        </div>
+    </div>
+    <script>
+        function showImage() {
+            document.getElementById('gifImage').style.display = 'block';
+        }
+
+        function increaseLoveButton() {
+            const loveButton = document.getElementById('loveButton');
+            loveButton.style.position = 'absolute';
+            loveButton.style.top = `${Math.random() * window.innerHeight}px`;
+            loveButton.style.left = `${Math.random() * window.innerWidth}px`;
+        }
+    </script>
+</body>
+</html>
