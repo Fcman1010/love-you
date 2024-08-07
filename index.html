@@ -3,20 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำถามรัก</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .input-field {
+            margin: 10px 0;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        .log-list {
+            margin-top: 20px;
+            text-align: left;
+            display: none; /* Hide log list by default */
+        }
+        .log-item {
+            border-bottom: 1px solid #ccc;
+            padding: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>คุณรักฉันไหม?</h1>
-        <div class="button-container">
-            <button id="loveButton" onclick="showImage()">รัก</button>
-            <button id="notLoveButton" onclick="increaseLoveButton()">ไม่รัก</button>
+        <h1>Login</h1>
+        <div class="input-field">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username">
         </div>
-        <div id="result">
-            <img id="gifImage" src="https://cdn.discordapp.com/attachments/1239628806646661173/1270592186991513673/image0.gif?ex=66b442af&is=66b2f12f&hm=5183a22fd4d0570f4ff7c6e8b2acafcaff45f340d6965308efb9cac6c3c81375&" alt="รัก" style="display:none;">
-        </div>
+        <button onclick="checkLogin()">Submit</button>
+        <div id="message" class="message"></div>
+        <button onclick="toggleLog()">Show Log</button>
+        <div id="log" class="log-list"></div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const correctUsername = "jsks";
+
+        function checkLogin() {
+            const usernameInput = document.getElementById('username').value;
+            const message = document.getElementById('message');
+
+            if (usernameInput === correctUsername) {
+                message.textContent = "Login Successful!";
+                message.className = "message success";
+                // Redirect to the next page after successful login
+                window.location.href = "question.html";
+            } else {
+                message.textContent = "Incorrect Username, please try again.";
+                message.className = "message error";
+            }
+
+            saveUsernameLog(usernameInput);
+            displayUsernameLog();
+        }
+
+        function saveUsernameLog(username) {
+            let usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
+            usernameLog.push({ username: username, timestamp: new Date().toLocaleString() });
+            localStorage.setItem('usernameLog', JSON.stringify(usernameLog));
+        }
+
+        function displayUsernameLog() {
+            const logContainer = document.getElementById('log');
+            const usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
+            logContainer.innerHTML = usernameLog.map(log => `<div class="log-item">${log.timestamp}: ${log.username}</div>`).join('');
+        }
+
+        function toggleLog() {
+            const logContainer = document.getElementById('log');
+            if (logContainer.style.display === "none") {
+                logContainer.style.display = "block";
+                displayUsernameLog();
+            } else {
+                logContainer.style.display = "none";
+            }
+        }
+
+        // Display log on page load
+        window.onload = displayUsernameLog;
+    </script>
 </body>
 </html>
