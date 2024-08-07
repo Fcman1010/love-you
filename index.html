@@ -29,6 +29,15 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        .log-list {
+            margin-top: 20px;
+            text-align: left;
+            display: none;
+        }
+        .log-item {
+            border-bottom: 1px solid #ccc;
+            padding: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -40,18 +49,47 @@
         </div>
         <button onclick="login()">ยืนยัน</button>
         <div id="message" class="message"></div>
+        <div class="input-field">
+            <label for="adminPassword">รหัสผ่านแอดมิน:</label>
+            <input type="password" id="adminPassword" placeholder="กรอกรหัสผ่านแอดมิน">
+        </div>
+        <button onclick="showLog()">ดูประวัติการกรอก</button>
+        <div id="log" class="log-list"></div>
     </div>
 
     <script>
         function login() {
             const usernameInput = document.getElementById('username').value;
             if (usernameInput) {
+                saveUsernameLog(usernameInput);
                 window.location.href = "question.html";
             } else {
                 const message = document.getElementById('message');
                 message.textContent = "โปรดกรอกชื่อผู้ใช้.";
                 message.className = "message error";
             }
+        }
+
+        function saveUsernameLog(username) {
+            let usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
+            usernameLog.push({ username: username, timestamp: new Date().toLocaleString() });
+            localStorage.setItem('usernameLog', JSON.stringify(usernameLog));
+        }
+
+        function showLog() {
+            const adminPassword = document.getElementById('adminPassword').value;
+            if (adminPassword === '2546') {
+                displayUsernameLog();
+            } else {
+                alert('รหัสผ่านแอดมินไม่ถูกต้อง');
+            }
+        }
+
+        function displayUsernameLog() {
+            const logContainer = document.getElementById('log');
+            const usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
+            logContainer.innerHTML = usernameLog.map(log => `<div class="log-item">${log.timestamp}: ${log.username}</div>`).join('');
+            logContainer.style.display = 'block';
         }
     </script>
 </body>
