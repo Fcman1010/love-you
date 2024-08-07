@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>หน้าล็อคอิน</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,81 +29,30 @@
             margin-top: 20px;
             font-weight: bold;
         }
-        .error {
-            color: red;
-        }
-        .success {
-            color: green;
-        }
-        .log-list {
-            margin-top: 20px;
-            text-align: left;
-            display: none; /* Hide log list by default */
-        }
-        .log-item {
-            border-bottom: 1px solid #ccc;
-            padding: 5px 0;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Login</h1>
+        <h1>เข้าสู่ระบบ</h1>
         <div class="input-field">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter your username">
+            <label for="username">ชื่อผู้ใช้:</label>
+            <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้ของคุณ">
         </div>
-        <button onclick="checkLogin()">Submit</button>
+        <button onclick="login()">ยืนยัน</button>
         <div id="message" class="message"></div>
-        <button onclick="toggleLog()">Show Log</button>
-        <div id="log" class="log-list"></div>
     </div>
 
     <script>
-        const correctUsername = "jsks";
-
-        function checkLogin() {
+        function login() {
             const usernameInput = document.getElementById('username').value;
-            const message = document.getElementById('message');
-
-            if (usernameInput === correctUsername) {
-                message.textContent = "Login Successful!";
-                message.className = "message success";
-                // Redirect to the next page after successful login
+            if (usernameInput) {
                 window.location.href = "question.html";
             } else {
-                message.textContent = "Incorrect Username, please try again.";
+                const message = document.getElementById('message');
+                message.textContent = "โปรดกรอกชื่อผู้ใช้.";
                 message.className = "message error";
             }
-
-            saveUsernameLog(usernameInput);
-            displayUsernameLog();
         }
-
-        function saveUsernameLog(username) {
-            let usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
-            usernameLog.push({ username: username, timestamp: new Date().toLocaleString() });
-            localStorage.setItem('usernameLog', JSON.stringify(usernameLog));
-        }
-
-        function displayUsernameLog() {
-            const logContainer = document.getElementById('log');
-            const usernameLog = JSON.parse(localStorage.getItem('usernameLog')) || [];
-            logContainer.innerHTML = usernameLog.map(log => `<div class="log-item">${log.timestamp}: ${log.username}</div>`).join('');
-        }
-
-        function toggleLog() {
-            const logContainer = document.getElementById('log');
-            if (logContainer.style.display === "none") {
-                logContainer.style.display = "block";
-                displayUsernameLog();
-            } else {
-                logContainer.style.display = "none";
-            }
-        }
-
-        // Display log on page load
-        window.onload = displayUsernameLog;
     </script>
 </body>
 </html>
