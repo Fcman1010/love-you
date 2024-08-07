@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทำแบบทดสอบ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .question {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ทำแบบทดสอบ</h1>
+        <div id="quiz"></div>
+        <button onclick="submitQuiz()">ส่งคำตอบ</button>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "สีโปรดของฉันคือสีอะไร?",
+                choices: ["แดง", "น้ำเงิน", "เขียว", "เหลือง"],
+                correctAnswer: 1
+            },
+            {
+                question: "อาหารโปรดของฉันคืออะไร?",
+                choices: ["พิซซ่า", "ส้มตำ", "ข้าวผัด", "ผัดไทย"],
+                correctAnswer: 3
+            },
+            {
+                question: "หนังโปรดของฉันคือเรื่องอะไร?",
+                choices: ["อินเซ็ปชั่น", "ทอย สตอรี่", "เอเวอรีธิง", "แมดแม็กซ์"],
+                correctAnswer: 0
+            },
+            {
+                question: "กิจกรรมที่ฉันชอบทำในวันหยุดคืออะไร?",
+                choices: ["อ่านหนังสือ", "เดินป่า", "ดูหนัง", "เล่นเกม"],
+                correctAnswer: 2
+            },
+            {
+                question: "การเดินทางที่ฉันอยากไปมากที่สุดคือที่ไหน?",
+                choices: ["ญี่ปุ่น", "ฝรั่งเศส", "ออสเตรเลีย", "สหรัฐอเมริกา"],
+                correctAnswer: 0
+            },
+            {
+                question: "สีที่ฉันไม่ชอบคือสีอะไร?",
+                choices: ["ส้ม", "เทา", "ม่วง", "ชมพู"],
+                correctAnswer: 1
+            },
+            {
+                question: "ฉันชอบฤดูไหนมากที่สุด?",
+                choices: ["ฤดูร้อน", "ฤดูหนาว", "ฤดูฝน", "ฤดูใบไม้ผลิ"],
+                correctAnswer: 3
+            },
+            {
+                question: "เพลงโปรดของฉันคือเพลงอะไร?",
+                choices: ["เพลงป๊อป", "เพลงร็อก", "เพลงแจ๊ส", "เพลงคลาสสิก"],
+                correctAnswer: 0
+            },
+            {
+                question: "อาหารเช้าที่ฉันชอบคืออะไร?",
+                choices: ["ข้าวต้ม", "แพนเค้ก", "ขนมปัง", "ก๋วยเตี๋ยว"],
+                correctAnswer: 1
+            },
+            {
+                question: "สัตว์เลี้ยงที่ฉันอยากมีคืออะไร?",
+                choices: ["สุนัข", "แมว", "กระต่าย", "นก"],
+                correctAnswer: 0
+            }
+        ];
+
+        function loadQuiz() {
+            const quizContainer = document.getElementById('quiz');
+            quizContainer.innerHTML = '';
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <p>${q.question}</p>
+                    ${q.choices.map((choice, i) => `
+                        <label>
+                            <input type="radio" name="question${index}" value="${i}">
+                            ${choice}
+                        </label>
+                    `).join('')}
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption && parseInt(selectedOption.value) === q.correctAnswer) {
+                    score++;
+                }
+            });
+            const percentage = (score / questions.length) * 100;
+            localStorage.setItem('quizScore', percentage);
+            window.location.href = "result.html";
+        }
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+</body>
+</html>
