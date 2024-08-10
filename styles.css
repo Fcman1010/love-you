@@ -1,63 +1,99 @@
+/* กำหนดพื้นหลังและรูปแบบของ body */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #e0f7fa; /* สีพื้นหลังอ่อน */
+    color: #333;
     margin: 0;
     padding: 0;
-    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+/* สไตล์ของคอนเทนเนอร์หลัก */
 .container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* กำหนดความกว้างสูงสุด */
     padding: 20px;
-    margin: 50px auto;
-    max-width: 500px;
+    background-color: #ffffff; /* สีพื้นหลังของคอนเทนเนอร์ */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
+/* สไตล์ของหัวเรื่อง */
 h1 {
-    color: #333;
+    font-size: 28px;
     margin-bottom: 20px;
+    color: #00796b; /* สีของหัวเรื่อง */
 }
 
-.button-container {
-    margin: 20px 0;
+/* สไตล์ของช่องกรอกข้อมูลและปุ่ม */
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #00796b; /* ขอบของช่องกรอกข้อมูล */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
 button {
-    padding: 15px 25px;
-    margin: 10px;
-    font-size: 16px;
+    width: 100%;
+    padding: 12px;
+    background-color: #00796b; /* สีพื้นหลังของปุ่ม */
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
-#loveButton {
-    background-color: #ff9999;
-    color: #fff;
+button:hover {
+    background-color: #004d40; /* สีของปุ่มเมื่อวางเมาส์ */
 }
 
-#loveButton:hover {
-    background-color: #ff6666;
+/* สไตล์ของกล่องแคปชั่น */
+.caption-box {
+    padding: 20px;
+    background-color: #b2dfdb; /* สีพื้นหลังของกล่องแคปชั่น */
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#notLoveButton {
-    background-color: #9999ff;
-    color: #fff;
+#caption {
+    font-size: 18px;
+    color: #004d40; /* สีของข้อความแคปชั่น */
 }
 
-#notLoveButton:hover {
-    background-color: #6666ff;
+/* สไตล์ของปุ่มย้อนกลับ */
+#back-btn, #back-btn-history {
+    background-color: #004d40; /* สีพื้นหลังของปุ่มย้อนกลับ */
 }
 
-#result {
+#back-btn:hover, #back-btn-history:hover {
+    background-color: #00332d; /* สีของปุ่มย้อนกลับเมื่อวางเมาส์ */
+}
+
+/* สไตล์ของลิงก์ติดต่อเรา */
+#contact-btn {
+    display: block;
+    text-align: center;
     margin-top: 20px;
+    color: #00796b;
+    text-decoration: none;
+    border: 2px solid #00796b;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ffffff; /* สีพื้นหลังของลิงก์ */
 }
 
-#gifImage {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+#contact-btn:hover {
+    background-color: #00796b;
+    color: #ffffff;
+    text-decoration: none;
 }
