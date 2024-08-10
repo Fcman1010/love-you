@@ -3,47 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ทดสอบความรู้ใจ</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-           มี display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f7f7f7;
-        }
-        .container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .input-field {
-            margin: 10px 0;
-        }
-    </style>
+    <title>แอพสุ่มแคปชั่น</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>ทดสอบความรู้ใจ</h1>
-        <div class="input-field">
-            <label for="name">ชื่อของคุณ:</label>
-            <input type="text" id="name" placeholder="ใส่ชื่อเล่น">
-        </div>
-        <button onclick="startQuiz()">เริ่มทำแบบทดสอบ</button>
+    <!-- หน้าหลัก -->
+    <div id="main-container" class="container">
+        <h1>กรอกชื่อของคุณ</h1>
+        <input type="text" id="username" placeholder="กรอกชื่อของคุณ">
+        <button id="start-btn">เริ่ม</button>
+        <a href="https://www.instagram.com/wriatc?igsh=MWMxdWl4Zzd4cDh0Ng==" id="contact-btn" target="_blank">ติดต่อเรา</a>
     </div>
-    <script>
-        function startQuiz() {
-            const name = document.getElementById('name').value;
-            if (name) {
-                localStorage.setItem('userName', name);
-                window.location.href = "quiz.html";
-            } else {
-                alert("ใส่ชื่อเล่น");
-            }
-        }
-    </script>
+
+    <!-- หน้าสุ่มแคปชั่น -->
+    <div id="caption-container" class="container" style="display: none;">
+        <h1>สุ่มแคปชั่น</h1>
+        <div class="caption-box">
+            <p id="caption">กรุณากดปุ่มด้านล่างเพื่อสุ่มแคปชั่น</p>
+        </div>
+        <button id="generate-btn">สุ่มแคปชั่น</button>
+        <button id="back-btn">กลับ</button>
+    </div>
+
+    <!-- หน้าประวัติการกรอกชื่อ -->
+    <div id="history-container" class="container" style="display: none;">
+        <h1>ประวัติการกรอกชื่อ</h1>
+        <p id="history-output"></p>
+        <button id="back-btn-history">กลับ</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
